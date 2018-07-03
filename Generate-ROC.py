@@ -30,23 +30,3 @@ plt.ylabel('True Positive Rate')
 plt.title('ROC Curve of Bot Detection Result')
 plt.legend(loc="lower right")
 plt.show()
-
-
-import json
-import os
-import pickle
-import operator
-
-def load_object(filename):
-    with open(filename, 'rb') as input:
-        obj = pickle.load(input)
-    return obj
-
-def save_object(obj, filename):
-    with open(filename, 'wb') as output:  # Overwrites any existing file.
-        pickle.dump(obj, output, pickle.HIGHEST_PROTOCOL)
-
-df = load_object('G:\\work\\TwitterAPI\\Cleaning\\all_1205-26062018\\df_bot_results.pkl')
-bot_user = df[df.bot_score > 0.5][['uid', 'screen_name','bot_score']]
-bot_user.head
-save_object(bot_user, 'G:\\work\\TwitterAPI\\Cleaning\\all_1205-26062018\\bot-from-bot_score.pkl')
